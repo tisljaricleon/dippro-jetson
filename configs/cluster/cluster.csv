@@ -1,0 +1,3 @@
+raspberrypi,global_aggregator,,0.1,,
+sem2-desktop,client,"raspberrypi:100,worker-desktop:100",0.3,24,0
+worker-desktop,client,"raspberrypi:100,sem2-desktop:100",0.3,24,1
