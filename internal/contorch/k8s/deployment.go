@@ -51,6 +51,11 @@ func BuildGlobalAggregatorDeployment(aggregator *model.FlAggregator) *appsv1.Dep
 								},
 								{
 									Name:      "gaconfig",
+									MountPath: "/home/cloudlets.json",
+									SubPath:   "cloudlets.json",
+								},
+								{
+									Name:      "gaconfig",
 									MountPath: "/home/files",
 								},
 							},
@@ -191,6 +196,11 @@ func BuildClientDeployment(client *model.FlClient) *appsv1.Deployment {
 									   Name:      "clientconfig",
 									   MountPath: "/home/client_config.yaml",
 									   SubPath:   "client_config.yaml",
+								   },
+								   {
+									   Name:      "clientconfig",
+									   MountPath: "/home/cloudlets.json",
+									   SubPath:   "cloudlets.json",
 								   },
 								   {
 									   Name:      "clientconfig",
