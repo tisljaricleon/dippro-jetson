@@ -61,12 +61,12 @@ func BuildGlobalAggregatorDeployment(aggregator *model.FlAggregator) *appsv1.Dep
 							},
 							Resources: corev1.ResourceRequirements{
 								Requests: corev1.ResourceList{
-									corev1.ResourceCPU:    resource.MustParse("1.0"),
-									corev1.ResourceMemory: resource.MustParse("500Mi"),
+									corev1.ResourceCPU:    resource.MustParse("2.0"),
+									corev1.ResourceMemory: resource.MustParse("4Gi"),
 								},
 								Limits: corev1.ResourceList{
-									corev1.ResourceCPU:    resource.MustParse("2.0"),
-									corev1.ResourceMemory: resource.MustParse("1Gi"),
+									corev1.ResourceCPU:    resource.MustParse("4.0"),
+									corev1.ResourceMemory: resource.MustParse("4Gi"),
 								},
 							},
 						},
@@ -209,12 +209,12 @@ func BuildClientDeployment(client *model.FlClient) *appsv1.Deployment {
 							   },
 							   Resources: corev1.ResourceRequirements{
 								   Requests: corev1.ResourceList{
-									   corev1.ResourceCPU:    resource.MustParse("1.0"),
-									   corev1.ResourceMemory: resource.MustParse("1500Mi"),
+									   corev1.ResourceCPU:    resource.MustParse("2.0"),
+									   corev1.ResourceMemory: resource.MustParse("4Gi"),
 								   },
 								   Limits: corev1.ResourceList{
-									   corev1.ResourceCPU:    resource.MustParse("2.0"),
-									   corev1.ResourceMemory: resource.MustParse("2000Mi"),
+									   corev1.ResourceCPU:    resource.MustParse("4.0"),
+									   corev1.ResourceMemory: resource.MustParse("4Gi"),
 								   },
 							   },
 						   },

@@ -43,7 +43,7 @@ func BuildGlobalAggregatorConfigFiles(flAggregator *model.FlAggregator) (map[str
 	}
 
 	if cloudletsString != "" {
-		filesData["cloudlets.json"] = cloudletsString
+		filesData["data/cloudlets.json"] = cloudletsString
 	}
 
 	for k, v := range filesFiles {
@@ -99,7 +99,7 @@ func BuildClientConfigFiles(client *model.FlClient) (map[string]string, error) {
 	}
 
 	if cloudletsString != "" {
-		filesData["cloudlets.json"] = cloudletsString
+		filesData["data/cloudlets.json"] = cloudletsString
 	}
 
 	for k, v := range filesFiles {
