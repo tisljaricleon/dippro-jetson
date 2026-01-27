@@ -19,6 +19,16 @@ func BuildGlobalAggregatorConfigFiles(flAggregator *model.FlAggregator) (map[str
 		return nil, fmt.Errorf("Failed to read files folder: %w", err)
 	}
 
+	// Add cloudlets.json from data folder
+	cloudletsPath := "../../data/cloudlets.json"
+	cloudletsBytes, err := os.ReadFile(cloudletsPath)
+	var cloudletsString string
+	if err == nil {
+		cloudletsString = string(cloudletsBytes)
+	} else {
+		fmt.Printf("[BuildGlobalAggregatorConfigFiles] Warning: could not read cloudlets.json: %v\n", err)
+	}
+
 	taskBytesArray, err := os.ReadFile(fmt.Sprint(configDirectoryPath, "task/task.py"))
 	if err != nil {
 		fmt.Print(err)
@@ -30,6 +40,10 @@ func BuildGlobalAggregatorConfigFiles(flAggregator *model.FlAggregator) (map[str
 	filesData := map[string]string{
 		"task.py":                   taskString,
 		"global_server_config.yaml": globalAggregatorConfig,
+	}
+
+	if cloudletsString != "" {
+		filesData["cloudlets.json"] = cloudletsString
 	}
 
 	for k, v := range filesFiles {
@@ -53,11 +67,20 @@ func BuildLocalAggregatorConfigFiles(flAggregator *model.FlAggregator) (map[stri
 func BuildClientConfigFiles(client *model.FlClient) (map[string]string, error) {
 	configDirectoryPath := "../../configs/fl/"
 
-
 	filesFolderPath := "../../files"
 	filesFiles, err := common.ReadFolderToFileMap(filesFolderPath)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to read files folder: %w", err)
+	}
+
+	// Add cloudlets.json from data folder
+	cloudletsPath := "../../data/cloudlets.json"
+	cloudletsBytes, err := os.ReadFile(cloudletsPath)
+	var cloudletsString string
+	if err == nil {
+		cloudletsString = string(cloudletsBytes)
+	} else {
+		fmt.Printf("[BuildClientConfigFiles] Warning: could not read cloudlets.json: %v\n", err)
 	}
 
 	taskBytesArray, err := os.ReadFile(fmt.Sprint(configDirectoryPath, "task/task.py"))
@@ -75,6 +98,9 @@ func BuildClientConfigFiles(client *model.FlClient) (map[string]string, error) {
 		"client_config.yaml": clientConfigString,
 	}
 
+	if cloudletsString != "" {
+		filesData["cloudlets.json"] = cloudletsString
+	}
 
 	for k, v := range filesFiles {
 		fmt.Printf("[BuildClientConfigFiles] Adding file from files folder to client ConfigMap: %s\n", k)
