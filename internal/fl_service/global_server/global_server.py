@@ -27,11 +27,15 @@ class FedAvgWithMetrics(FedAvg):
 
         accuracies = [r.metrics["accuracy"] for _, r in results if "accuracy" in r.metrics]
         losses = [r.metrics["loss"] for _, r in results if "loss" in r.metrics]
+        maes = [r.metrics["mae"] for _, r in results if "mae" in r.metrics]
+        rmses = [r.metrics["rmse"] for _, r in results if "rmse" in r.metrics]
 
         avg_accuracy = sum(accuracies) / len(accuracies) if accuracies else None
         avg_loss = sum(losses) / len(losses) if losses else None
+        avg_mae = sum(maes) / len(maes) if maes else None
+        avg_rmse = sum(rmses) / len(rmses) if rmses else None
 
-        print(f"Round {rnd} - Avg Accuracy: {avg_accuracy:.4f}, Avg Loss: {avg_loss:.4f}")
+        print(f"Round {rnd} - Avg Loss (MSE): {avg_loss:.4f}, Avg RMSE: {avg_rmse}, Avg MAE: {avg_mae}")
 
         return super().aggregate_evaluate(rnd, results, failures)
 

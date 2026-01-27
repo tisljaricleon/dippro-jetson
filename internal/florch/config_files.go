@@ -113,7 +113,7 @@ func BuildClientConfigFiles(client *model.FlClient) (map[string]string, error) {
 const GlobalAggregatorConfig_Yaml = `
 server:
   address: "0.0.0.0:8080"
-  global_rounds: 1
+  global_rounds: 10
 
 strategy:
   fraction_fit: 1.0

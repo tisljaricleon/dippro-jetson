@@ -1,3 +1,4 @@
+import math
 import yaml
 import sys
 import torch
@@ -42,9 +43,10 @@ class FlowerClient(fl.client.NumPyClient):
     def evaluate(self, parameters, config):
         """Evaluate the model on the data this client has."""
         set_weights(self.net, parameters)
-        loss, accuracy = test(self.net, self.valloader, self.device)
-        logging.info(f"[Client {self.partition_id}] test loss: {loss} , test accuracy: {accuracy} ")
-        return loss, len(self.valloader.dataset), {"accuracy": accuracy,"loss":loss}
+        loss, mae = test(self.net, self.valloader, self.device)
+        rmse = math.sqrt(loss)
+        logging.info(f"[Client {self.partition_id}] test loss (MSE): {loss}, RMSE: {rmse}, MAE: {mae}")
+        return loss, len(self.valloader.dataset), {"accuracy": 0, "loss": loss, "mae": mae, "rmse": rmse}
 # ---------------------------
 # Main
 # ---------------------------
