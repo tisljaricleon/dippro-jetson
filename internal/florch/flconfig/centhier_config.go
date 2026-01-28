@@ -86,7 +86,7 @@ func getOptimalConfigurationCentralized(nodes []*model.Node, modelSize float32, 
 		NumClients:      int32(len(clients)),
 		Rounds:          common.GLOBAL_AGGREGATOR_ROUNDS,
 	}
-	flClients := common.ClientNodesToFlClients(clients, flGlobalAggregator, int32(minEpochs))
+	flClients := common.ClientNodesToFlClients(clients, flGlobalAggregator, int32(10))
 
 	return flGlobalAggregator, flClients, minEpochs
 }
