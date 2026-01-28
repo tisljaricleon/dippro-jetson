@@ -40,7 +40,9 @@ class FedAvgWithMetrics(FedAvg):
         return super().aggregate_evaluate(rnd, results, failures)
 
 
+
 if __name__ == "__main__":
+    print("[Global Server] worked")
 
     with open("global_server_config.yaml", "r") as f:
         config = yaml.safe_load(f)

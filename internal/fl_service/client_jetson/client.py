@@ -51,6 +51,8 @@ class FlowerClient(fl.client.NumPyClient):
 # Main
 # ---------------------------
 if __name__ == "__main__":
+    print("[Client] worked")
+
     start = time.time()
 
     with open("client_config.yaml", 'r') as file:
