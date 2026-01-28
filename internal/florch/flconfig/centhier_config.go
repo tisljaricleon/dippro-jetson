@@ -30,13 +30,15 @@ func (config *CentrHierFlConfiguration) GetOptimalConfiguration(nodes []*model.N
 	var epochs int32
 	var localRounds int32
 
+
 	_, potentialLocalAggregators, _ := common.GetClientsAndAggregators(nodes)
 	if len(potentialLocalAggregators) == 0 {
-		globalAggregator, clients, epochs = getOptimalConfigurationCentralized(nodes, config.modelSize, config.communicationBudget)
+		//globalAggregator, clients, epochs = getOptimalConfigurationCentralized(nodes, config.modelSize, config.communicationBudget)
 	} else {
 		globalAggregator, localAggregators, clients, epochs, localRounds = config.getOptimalConfigurationHierarchical(nodes,
 			config.modelSize, config.communicationBudget)
 	}
+
 
 	return &FlConfiguration{
 		GlobalAggregator: globalAggregator,
