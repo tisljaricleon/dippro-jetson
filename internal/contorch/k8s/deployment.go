@@ -12,91 +12,89 @@ import (
 )
 
 func BuildGlobalAggregatorDeployment(aggregator *model.FlAggregator) *appsv1.Deployment {
-	deployment := &appsv1.Deployment{
-		ObjectMeta: metav1.ObjectMeta{
-			Name: common.GLOBAL_AGGRETATOR_DEPLOYMENT_NAME,
-		},
-		Spec: appsv1.DeploymentSpec{
-			Selector: &metav1.LabelSelector{
-				MatchLabels: map[string]string{
-					"fl": "ga",
-				},
-			},
-			Template: corev1.PodTemplateSpec{
-				ObjectMeta: metav1.ObjectMeta{
-					Labels: map[string]string{
-						"fl": "ga",
-					},
-				},
-				Spec: corev1.PodSpec{
-					Containers: []corev1.Container{
-						{
-							Name:  "fl-ga",
-							Image: common.GLOBAL_AGGRETATOR_IMAGE,
-							Ports: []corev1.ContainerPort{
-								{
-									ContainerPort: aggregator.Port,
-								},
-							},
-							VolumeMounts: []corev1.VolumeMount{
-								{
-									Name:      "gaconfig",
-									MountPath: "/home/task.py",
-									SubPath:   "task.py",
-								},
-								{
-									Name:      "gaconfig",
-									MountPath: "/home/global_server_config.yaml",
-									SubPath:   "global_server_config.yaml",
-								},
-								{
-									Name:      "gaconfig",
-									MountPath: "/home/data/cloudlets.json",
-									SubPath:   "cloudlets.json",
-								},
-								{
-									Name:      "gaconfig",
-									MountPath: "/home/files",
-								},
-								{
-									Name:      "gaconfig",
-									MountPath: "/home/global_server.py",
-									SubPath:   "global_server.py",
-								},
-							},
-							Resources: corev1.ResourceRequirements{
-								Requests: corev1.ResourceList{
-									corev1.ResourceCPU:    resource.MustParse("2.0"),
-									corev1.ResourceMemory: resource.MustParse("4Gi"),
-								},
-								Limits: corev1.ResourceList{
-									corev1.ResourceCPU:    resource.MustParse("4.0"),
-									corev1.ResourceMemory: resource.MustParse("4Gi"),
-								},
-							},
-						},
-					},
-					Volumes: []corev1.Volume{
-						{
-							Name: "gaconfig",
-							VolumeSource: corev1.VolumeSource{
-								ConfigMap: &corev1.ConfigMapVolumeSource{
-									Items: []corev1.KeyToPath{},
-									LocalObjectReference: corev1.LocalObjectReference{
-										Name: common.GetGlobalAggregatorConfigMapName(aggregator.Id),
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-		}
-
-	return deployment
-
-	return deployment
-}
+	       deployment := &appsv1.Deployment{
+		       ObjectMeta: metav1.ObjectMeta{
+			       Name: common.GLOBAL_AGGRETATOR_DEPLOYMENT_NAME,
+		       },
+		       Spec: appsv1.DeploymentSpec{
+			       Selector: &metav1.LabelSelector{
+				       MatchLabels: map[string]string{
+					       "fl": "ga",
+				       },
+			       },
+			       Template: corev1.PodTemplateSpec{
+				       ObjectMeta: metav1.ObjectMeta{
+					       Labels: map[string]string{
+						       "fl": "ga",
+					       },
+				       },
+				       Spec: corev1.PodSpec{
+					       Containers: []corev1.Container{
+						       {
+							       Name:  "fl-ga",
+							       Image: common.GLOBAL_AGGRETATOR_IMAGE,
+							       Ports: []corev1.ContainerPort{
+								       {
+									       ContainerPort: aggregator.Port,
+								       },
+							       },
+							       VolumeMounts: []corev1.VolumeMount{
+								       {
+									       Name:      "gaconfig",
+									       MountPath: "/home/task.py",
+									       SubPath:   "task.py",
+								       },
+								       {
+									       Name:      "gaconfig",
+									       MountPath: "/home/global_server_config.yaml",
+									       SubPath:   "global_server_config.yaml",
+								       },
+								       {
+									       Name:      "gaconfig",
+									       MountPath: "/home/data/cloudlets.json",
+									       SubPath:   "cloudlets.json",
+								       },
+								       {
+									       Name:      "gaconfig",
+									       MountPath: "/home/files",
+								       },
+								       {
+									       Name:      "gaconfig",
+									       MountPath: "/home/global_server.py",
+									       SubPath:   "global_server.py",
+								       },
+							       },
+							       Resources: corev1.ResourceRequirements{
+								       Requests: corev1.ResourceList{
+									       corev1.ResourceCPU:    resource.MustParse("2.0"),
+									       corev1.ResourceMemory: resource.MustParse("4Gi"),
+								       },
+								       Limits: corev1.ResourceList{
+									       corev1.ResourceCPU:    resource.MustParse("4.0"),
+									       corev1.ResourceMemory: resource.MustParse("4Gi"),
+								       },
+							       },
+						       },
+					       },
+					       Volumes: []corev1.Volume{
+						       {
+							       Name: "gaconfig",
+							       VolumeSource: corev1.VolumeSource{
+								       ConfigMap: &corev1.ConfigMapVolumeSource{
+									       Items: []corev1.KeyToPath{},
+									       LocalObjectReference: corev1.LocalObjectReference{
+										       Name: common.GetGlobalAggregatorConfigMapName(aggregator.Id),
+									       },
+								       },
+							       },
+						       },
+					       },
+				       },
+			       },
+		       },
+	       }
+	       return deployment
+	}
 
 func BuildLocalAggregatorDeployment(aggregator *model.FlAggregator) *appsv1.Deployment {
 	deployment := &appsv1.Deployment{
