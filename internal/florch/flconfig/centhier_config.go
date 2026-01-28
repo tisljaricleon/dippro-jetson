@@ -39,6 +39,7 @@ func (config *CentrHierFlConfiguration) GetOptimalConfiguration(nodes []*model.N
 	} else {
 		globalAggregator, localAggregators, clients, epochs, localRounds = config.getOptimalConfigurationHierarchical(nodes,
 			config.modelSize, config.communicationBudget)
+		epochs = 10
 	}
 
 
