@@ -35,6 +35,16 @@ func BuildGlobalAggregatorConfigFiles(flAggregator *model.FlAggregator) (map[str
 	}
 	taskString := string(taskBytesArray)
 
+	// Add global_server.py from global_server directory
+	globalServerPyPath := "../../internal/fl_service/global_server/global_server.py"
+	globalServerPyBytes, err := os.ReadFile(globalServerPyPath)
+	var globalServerPyString string
+	if err == nil {
+		globalServerPyString = string(globalServerPyBytes)
+	} else {
+		fmt.Printf("[BuildGlobalAggregatorConfigFiles] Warning: could not read global_server.py: %v\n", err)
+	}
+
 	globalAggregatorConfig := GlobalAggregatorConfig_Yaml
 
 	filesData := map[string]string{
@@ -44,6 +54,10 @@ func BuildGlobalAggregatorConfigFiles(flAggregator *model.FlAggregator) (map[str
 
 	if cloudletsString != "" {
 		filesData["cloudlets.json"] = cloudletsString
+	}
+
+	if globalServerPyString != "" {
+		filesData["global_server.py"] = globalServerPyString
 	}
 
 	for k, v := range filesFiles {
@@ -89,6 +103,16 @@ func BuildClientConfigFiles(client *model.FlClient) (map[string]string, error) {
 	}
 	taskString := string(taskBytesArray)
 
+	// Add client.py from client_jetson directory
+	clientPyPath := "../../internal/fl_service/client_jetson/client.py"
+	clientPyBytes, err := os.ReadFile(clientPyPath)
+	var clientPyString string
+	if err == nil {
+		clientPyString = string(clientPyBytes)
+	} else {
+		fmt.Printf("[BuildClientConfigFiles] Warning: could not read client.py: %v\n", err)
+	}
+
 	clientConfigString := fmt.Sprintf(ClientConfig_Yaml, client.ParentAddress, strconv.Itoa(int(client.PartitionId)),
 		strconv.Itoa(int(client.NumPartitions)), strconv.Itoa(int(client.Epochs)), strconv.Itoa(int(client.BatchSize)),
 		fmt.Sprintf("%f", client.LearningRate))
@@ -100,6 +124,10 @@ func BuildClientConfigFiles(client *model.FlClient) (map[string]string, error) {
 
 	if cloudletsString != "" {
 		filesData["cloudlets.json"] = cloudletsString
+	}
+
+	if clientPyString != "" {
+		filesData["client.py"] = clientPyString
 	}
 
 	for k, v := range filesFiles {

@@ -58,6 +58,11 @@ func BuildGlobalAggregatorDeployment(aggregator *model.FlAggregator) *appsv1.Dep
 									Name:      "gaconfig",
 									MountPath: "/home/files",
 								},
+								{
+									Name:      "gaconfig",
+									MountPath: "/home/global_server.py",
+									SubPath:   "global_server.py",
+								},
 							},
 							Resources: corev1.ResourceRequirements{
 								Requests: corev1.ResourceList{
@@ -86,8 +91,9 @@ func BuildGlobalAggregatorDeployment(aggregator *model.FlAggregator) *appsv1.Dep
 					},
 				},
 			},
-		},
-	}
+		}
+
+	return deployment
 
 	return deployment
 }
@@ -205,6 +211,12 @@ func BuildClientDeployment(client *model.FlClient) *appsv1.Deployment {
 								   {
 									   Name:      "clientconfig",
 									   MountPath: "/home/files",
+								   },
+								   // Mount client.py from ConfigMap
+								   {
+									   Name:      "clientconfig",
+									   MountPath: "/home/client.py",
+									   SubPath:   "client.py",
 								   },
 							   },
 							   Resources: corev1.ResourceRequirements{
