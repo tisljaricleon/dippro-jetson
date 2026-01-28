@@ -175,7 +175,7 @@ node_config:
   num-partitions: %[3]s 
 
 run_config:
-  local-epochs: 10
-  batch-size: 32
-  learning-rate: 0.001  
+  local-epochs: %[4]s 
+  batch-size: %[5]s 
+  learning-rate: %[6]s  
 `

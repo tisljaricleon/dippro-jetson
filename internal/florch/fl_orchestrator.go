@@ -75,6 +75,8 @@ func NewFlOrchestrator(contOrch contorch.IContainerOrchestrator, eventBus *event
 		orch.configurationModel = flconfig.NewMinimizeCommCostGreedyConfiguration(epochs, localRounds, modelSize)
 	case flconfig.Cent_Hier_ConfigModelName:
 		orch.configurationModel = flconfig.NewCentrHierFlConfiguration(modelSize, costConfiguration.Budget)
+	case flconfig.Cent_Hier_Simple_ConfigModelName:
+		orch.configurationModel = flconfig.NewSimpleFlConfiguration(epochs, localRounds, batchSize, learningRate)
 	default:
 		err := fmt.Errorf("invalid config model: %s", configurationModelName)
 		return nil, err

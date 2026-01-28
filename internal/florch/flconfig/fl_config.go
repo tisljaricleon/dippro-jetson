@@ -17,3 +17,4 @@ type IFlConfigurationModel interface {
 const Cent_Hier_ConfigModelName = "centHier"
 const MinimizeKld_ConfigModelName = "minKld"
 const MinimizeCommCost_ConfigModelName = "minCommCost"
+const Cent_Hier_Simple_ConfigModelName = "centHierSimple"
