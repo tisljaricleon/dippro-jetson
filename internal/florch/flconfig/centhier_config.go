@@ -27,7 +27,7 @@ func (config *CentrHierFlConfiguration) GetOptimalConfiguration(nodes []*model.N
 	var globalAggregator *model.FlAggregator
 	var localAggregators []*model.FlAggregator
 	var clients []*model.FlClient
-	var epochs int32
+	var epochs int32 = 10
 	var localRounds int32
 
 
