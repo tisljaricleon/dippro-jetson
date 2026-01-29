@@ -9,3 +9,23 @@ curl -X POST http://192.168.0.117:8080/fl/start \
       "learningRate": 0.001
     }
   }'
+
+  curl -X POST http://192.168.0.117:8080/fl/start \
+  -H "Content-Type: application/json" \
+  -d '{
+    "epochs": 10,
+    "globalRounds": 3,
+    "localRounds": 2,
+    "trainingParams": {
+      "batchSize": 128,
+      "learningRate": 0.1
+    },
+    "configurationModel": "centHier",
+    "modelSize": 3.3,
+    "costConfiguration": {
+      "costType": "totalBudget",
+      "budget": 10000
+    },
+    "costSource": "COMMUNICATION",
+    "rvafnabled": true
+  }'

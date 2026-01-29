@@ -87,7 +87,6 @@ func BuildClientConfigFiles(client *model.FlClient) (map[string]string, error) {
 		return nil, fmt.Errorf("Failed to read files folder: %w", err)
 	}
 
-	// Add cloudlets.json from data folder
 	cloudletsPath := "../../data/cloudlets.json"
 	cloudletsBytes, err := os.ReadFile(cloudletsPath)
 	var cloudletsString string
@@ -103,7 +102,6 @@ func BuildClientConfigFiles(client *model.FlClient) (map[string]string, error) {
 	}
 	taskString := string(taskBytesArray)
 
-	// Add client.py from client_jetson directory
 	clientPyPath := "../../internal/fl_service/client_jetson/client.py"
 	clientPyBytes, err := os.ReadFile(clientPyPath)
 	var clientPyString string
